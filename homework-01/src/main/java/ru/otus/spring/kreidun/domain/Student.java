@@ -5,6 +5,8 @@ public class Student {
     private String firstname;
     private String lastname;
 
+    public Student() {}
+
     public Student(String firstname, String lastname) {
         this.firstname = firstname;
         this.lastname = lastname;
