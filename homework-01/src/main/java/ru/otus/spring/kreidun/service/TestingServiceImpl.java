@@ -13,40 +13,41 @@ public class TestingServiceImpl implements TestingService {
     private final QuestionDao questionDao;
     private final UserInterfaceService userInterfaceService;
     private final Config config;
+    private final Testing testing;
 
     public TestingServiceImpl(QuestionDao questionDao,
                            UserInterfaceService userInterfaceService,
-                           Config config) {
+                           Config config,
+                           Testing testing) {
 
         this.questionDao = questionDao;
         this.userInterfaceService = userInterfaceService;
         this.config = config;
+        this.testing = testing;
     }
 
-    private void initStudent(Testing testing) {
+    private void initStudent() {
 
         Student student = new Student();
         student = userInterfaceService.RegisteringStudent("Enter your firstname:","Enter your lastname:");
         testing.setStudent(student);
     }
 
-    public void setQuestions(Testing testing) {
+    public void setQuestions() {
 
         questionDao.loadQuestions(config.getQuestionsFileName());
         testing.setQuestions(questionDao.getQuestions());
     }
 
     @Override
-    public Testing initTesting() {
+    public void initTesting() {
 
-        Testing testing = new Testing();
-        initStudent(testing);
-        setQuestions(testing);
-        return testing;
+        initStudent();
+        setQuestions();
     }
 
     @Override
-    public void runTesting(Testing testing) {
+    public void runTesting() {
 
         int questionNumber = 0;
         String answer;
@@ -61,7 +62,7 @@ public class TestingServiceImpl implements TestingService {
     }
 
     @Override
-    public void showResultTesting(Testing testing) {
+    public void showResultTesting() {
 
         String resultStr = "Student: " + testing.getStudent().getFirstname() + " " + testing.getStudent().getLastname() + "\n";
         if (testing.getTrueAnswersCount() >= config.getMinimumTrueAnswers()) {

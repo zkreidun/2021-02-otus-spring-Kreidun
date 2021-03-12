@@ -1,7 +1,10 @@
 package ru.otus.spring.kreidun.domain;
 
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
+@Service
 public class Testing {
 
     private Student student;

@@ -13,10 +13,12 @@ public class QuestionDaoCsv implements QuestionDao{
 
     private List<Question> questions;
 
+    {
+        questions = new ArrayList<>();
+    }
+
     @Override
     public void loadQuestions(String questionsFileName) {
-
-        questions = new ArrayList<>();
 
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream(questionsFileName);
         Scanner scanner = new Scanner(inputStream);
