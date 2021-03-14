@@ -1,5 +1,6 @@
 package ru.otus.spring.kreidun.dao;
 
+import org.springframework.stereotype.Repository;
 import ru.otus.spring.kreidun.domain.Question;
 
 import java.io.InputStream;
@@ -7,21 +8,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+@Repository
 public class QuestionDaoCsv implements QuestionDao{
 
-    private String questionsFileName;
+    private List<Question> questions;
 
-    public String getQuestionsFileName() {
-        return questionsFileName;
-    }
-
-    public void setQuestionsFileName(String questionsFileName) {
-        this.questionsFileName = questionsFileName;
+    {
+        questions = new ArrayList<>();
     }
 
     @Override
-    public List<Question> getQuestions() {
-        List<Question> questions = new ArrayList<>();
+    public void loadQuestions(String questionsFileName) {
+
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream(questionsFileName);
         Scanner scanner = new Scanner(inputStream);
 
@@ -29,6 +27,10 @@ public class QuestionDaoCsv implements QuestionDao{
             String[] line = scanner.nextLine().split(",");
             questions.add(new Question(line[0], line[1]));
         }
+    }
+
+    @Override
+    public List<Question> getQuestions() {
 
         return questions;
     }
