@@ -1,0 +1,12 @@
+
+
+  .-')       _ (`-.   _  .-')                  .-') _
+ ( ${AnsiColor.BLUE}OO${AnsiColor.DEFAULT} ).    ( (${AnsiColor.BLUE}OO${AnsiColor.DEFAULT}  ) ( \( -${AnsiColor.BLUE}O${AnsiColor.DEFAULT} )                ( ${AnsiColor.BLUE}OO${AnsiColor.DEFAULT} ) )
+(_)---\_)  _.`     \  ,------.    ,-.-')  ,--./ ,--,'    ,----.
+/    _ |  (__...--''  |   /`. '   |  |${AnsiColor.BLUE}OO${AnsiColor.DEFAULT}) |   \ |  |\   '  .-./-')
+\  :` `.   |  /  | |  |  /  | |   |  |  \ |    \|  | )  |  |_( ${AnsiColor.BLUE}O${AnsiColor.DEFAULT}- )
+ '..`''.)  |  |_.' |  |  |_.' |   |  |(_/ |  .     |/   |  | .--, \
+.-._)   \  |  .___.'  |  .  '.'  ,|  |_.' |  |\    |   (|  | '. (_/
+\       /  |  |       |  |\  \  (_|  |    |  | \   |    |  '--'  |
+ `-----'   `--'       `--' '--'   `--'    `--'  `--'     `------'
+

@@ -1,0 +1,6 @@
+config:
+  locale : en_US
+answers:
+  minimum-true-answers : 3
+filename:
+  pattern : test-questions-%s.csv
