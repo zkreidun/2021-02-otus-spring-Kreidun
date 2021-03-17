@@ -17,9 +17,7 @@ public class Testing implements TestingInterface{
     }
 
     @Override
-    public void setStudent(Student student) {
-        this.student = student;
-    }
+    public void setStudent(Student student) { this.student = student; }
 
     @Override
     public List<Question> getQuestions() {
@@ -40,4 +38,7 @@ public class Testing implements TestingInterface{
     public void IncrementTrueAnswersCount() {
         this.trueAnswersCount++;
     }
+
+    @Override
+    public void initTesting() { trueAnswersCount = 0; }
 }

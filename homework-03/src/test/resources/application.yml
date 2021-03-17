@@ -4,3 +4,7 @@ answers:
   minimum-true-answers : 3
 filename:
   pattern : test-questions-%s.csv
+spring :
+  shell :
+    interactive :
+      enabled : false

@@ -29,10 +29,10 @@ public class TestingServiceImpl implements TestingService {
         this.messageService = messageService;
     }
 
-    private void initStudent() {
+    @Override
+    public void regStudent() {
 
-        Student student = new Student();
-        student = userInterfaceService.RegisteringStudent(messageService.getMessage("question.firstname"),
+        Student student = userInterfaceService.RegisteringStudent(messageService.getMessage("question.firstname"),
                 messageService.getMessage("question.lastname"));
         testing.setStudent(student);
     }
@@ -45,14 +45,14 @@ public class TestingServiceImpl implements TestingService {
 
     public void initTesting() {
 
-        initStudent();
+        testing.initTesting();
         setQuestions();
     }
 
     @Override
     public void runTesting() {
 
-        initTesting();
+        this.initTesting();
 
         int questionNumber = 0;
         String answer;
@@ -77,7 +77,7 @@ public class TestingServiceImpl implements TestingService {
         else{
             resultStr = messageService.getMessage("result.failed");
         }
-        Object[] formatResult = new Object[4];
+        Object[] formatResult = new Object[3];
         formatResult[0] = testing.getStudent().getLastname() + " " + testing.getStudent().getFirstname();
         formatResult[1] = resultStr;
         formatResult[2] = testing.getTrueAnswersCount();
