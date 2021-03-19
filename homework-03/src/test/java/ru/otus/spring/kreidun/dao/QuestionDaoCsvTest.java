@@ -1,5 +1,6 @@
 package ru.otus.spring.kreidun.dao;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -8,7 +9,7 @@ import ru.otus.spring.kreidun.configuration.ConfigLocale;
 
 import static org.assertj.core.api.Assertions.*;
 
-
+@DisplayName("Тест QuestionDao")
 @SpringBootTest
 class QuestionDaoCsvTest {
 
@@ -18,12 +19,11 @@ class QuestionDaoCsvTest {
     @Autowired
     private ConfigLocale configLocale;
 
+    @DisplayName("должен корректно загружать вопросы")
     @Test
-    void loadQuestions() {
+    void shouldCorrectLoadQuestions() {
 
-        if (questionDao.getQuestions().isEmpty()) {
-            questionDao.loadQuestions();
-        }
+        questionDao.loadQuestions();
 
         if (configLocale.getLocale().toString().equals("ru_RU"))
         {

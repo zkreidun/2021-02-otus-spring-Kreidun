@@ -2,10 +2,8 @@ package ru.otus.spring.kreidun.domain;
 
 public class Student {
 
-    private String firstname;
-    private String lastname;
-
-    public Student() {}
+    private final String firstname;
+    private final String lastname;
 
     public Student(String firstname, String lastname) {
         this.firstname = firstname;
@@ -16,15 +14,5 @@ public class Student {
         return firstname;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
+    public String getLastname() { return lastname; }
 }

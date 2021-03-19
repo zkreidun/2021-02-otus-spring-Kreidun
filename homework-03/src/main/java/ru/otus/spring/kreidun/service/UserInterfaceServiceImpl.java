@@ -18,11 +18,11 @@ public class UserInterfaceServiceImpl implements UserInterfaceService{
     @Override
     public Student RegisteringStudent(String questionFirstName, String questionLastName) {
 
-        Student student = new Student();
         System.out.println(questionFirstName);
-        student.setFirstname(scanner.nextLine());
+        String firstName = scanner.nextLine();
         System.out.println(questionLastName);
-        student.setLastname(scanner.nextLine());
+        String lastName = scanner.nextLine();
+        Student student = new Student(firstName, lastName);
         return student;
     }
 
@@ -37,6 +37,6 @@ public class UserInterfaceServiceImpl implements UserInterfaceService{
 
     @Override
     public void showResult(String resultStr) {
-        System.out.print(resultStr);
+        System.out.println(resultStr);
     }
 }

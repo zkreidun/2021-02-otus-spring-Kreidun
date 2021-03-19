@@ -6,6 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@DisplayName("Тест Question")
 @SpringBootTest
 class QuestionTest {
 
@@ -18,18 +19,18 @@ class QuestionTest {
                 () -> assertEquals("Ответ", question.getStrAnswer()));
     }
 
-    @DisplayName("должен устанавливать вопрос")
+    @DisplayName("должен корректно устанавливать вопрос")
     @Test
-    void setStrQuestion() {
+    void shouldSetCorrectQuestion() {
         String  strQuestionTest = "Тестый вопрос";
         Question question = new Question("Вопрос", "Ответ");
         question.setStrQuestion(strQuestionTest);
         assertEquals(strQuestionTest, question.getStrQuestion());
     }
 
-    @DisplayName("должен устанавливать ответ")
+    @DisplayName("должен корректно устанавливать ответ")
     @Test
-    void setStrAnswer() {
+    void shouldSetCorrectAnswer() {
         String  strAnswerTest = "Тестый ответ";
         Question question = new Question("Вопрос", "Ответ");
         question.setStrAnswer(strAnswerTest);

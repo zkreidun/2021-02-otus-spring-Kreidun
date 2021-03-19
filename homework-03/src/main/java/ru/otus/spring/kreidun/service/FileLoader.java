@@ -1,7 +1,7 @@
 package ru.otus.spring.kreidun.service;
 
-import java.util.List;
+import java.util.Scanner;
 
 public interface FileLoader {
-    List<String> loadFile(String fileName);
+    Scanner loadFile(String fileName);
 }

@@ -15,4 +15,6 @@ public interface TestingInterface {
     public int getTrueAnswersCount();
 
     public void IncrementTrueAnswersCount();
+
+    public void initTesting();
 }

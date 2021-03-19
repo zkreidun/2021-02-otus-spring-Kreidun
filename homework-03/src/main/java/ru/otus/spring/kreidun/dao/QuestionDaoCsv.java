@@ -19,10 +19,6 @@ public class QuestionDaoCsv implements QuestionDao{
     private final FileLoaderImpl fileLoader;
     private final ParserCSV parserCSV;
 
-    {
-        questions = new ArrayList<>();
-    }
-
     public  QuestionDaoCsv(ConfigLocale configLocale,
                            ConfigFileName configFileName,
                            FileLoaderImpl fileLoader,
@@ -37,13 +33,11 @@ public class QuestionDaoCsv implements QuestionDao{
     @Override
     public void loadQuestions() {
 
+        questions = new ArrayList<>();
+
         String fileName = String.format(this.configFileName.getPattern(), this.configLocale.getLocale().toString());
 
-        List<String[]> strings = parserCSV.parsingFile(fileLoader.loadFile(fileName));
-
-        for (String[] line: strings) {
-            questions.add(new Question(line[0], line[1]));
-        }
+        questions = parserCSV.parsingFile(fileLoader.loadFile(fileName));
     }
 
     @Override
