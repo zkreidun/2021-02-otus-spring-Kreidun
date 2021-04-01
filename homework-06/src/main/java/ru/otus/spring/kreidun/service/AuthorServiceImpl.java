@@ -2,6 +2,7 @@ package ru.otus.spring.kreidun.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.otus.spring.kreidun.repositories.AuthorRepository;
 import ru.otus.spring.kreidun.models.Author;
 
@@ -15,13 +16,14 @@ public class AuthorServiceImpl implements AuthorService {
     private final IOService ioService;
 
     @Override
-    public void addNewAuthor(String firstName, String lastName) {
+    @Transactional
+    public void add(String firstName, String lastName) {
         Author author = new Author(0, firstName, lastName, null);
         authorRepository.save(author);
     }
 
     @Override
-    public void showAllAuthors() {
+    public void showAll() {
         String showAuthor;
         List<Author> listAuthor = authorRepository.getAll();
         for (Author author : listAuthor) {

@@ -21,7 +21,6 @@ public class Genre {
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 
-    @OneToMany(targetEntity = Book.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "book_id")
+    @OneToMany(targetEntity = Book.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "genre")
     private List<Book> books;
 }

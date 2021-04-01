@@ -7,7 +7,6 @@ import java.util.List;
 public interface BookRepository {
 
     int count();
-    void update (long id, String bookTitle, long authorId, long genreId);
     Book save(Book book);
     void deleteById (long id);
     Book getById (long id);

@@ -21,28 +21,35 @@ public class ShellLibraryCommands {
     @ShellMethod(key = {"a", "authors"}, value = "show all authors")
     public void showAllAuthors() {
         ioService.printString("Все авторы:");
-        authorService.showAllAuthors();
+        authorService.showAll();
     }
 
     @SneakyThrows
     @ShellMethod(key = {"g", "genres"}, value = "show all genres")
     public void showAllGenres() {
         ioService.printString("Все жанры:");
-        genreService.showAllGenres();
+        genreService.showAll();
     }
 
     @SneakyThrows
     @ShellMethod(key = {"b", "books"}, value = "show all books")
     public void showAllBooks() {
         ioService.printString("Все книги:");
-        bookService.showAllBooks();
+        bookService.showAll();
+    }
+
+    @SneakyThrows
+    @ShellMethod(key = {"bai", "booksbyauthorid"}, value = "show books by author_id")
+    public void showBooksByAuthorId(long author_id) {
+        ioService.printString("Книги автора:");
+        bookService.showByAuthorId(author_id);
     }
 
     @SneakyThrows
     @ShellMethod(key = {"c", "comments"}, value = "show all comments")
     public void showAllComments() {
         ioService.printString("Все комментарии:");
-        commentService.showAllComments();
+        commentService.showAll();
     }
 
 
@@ -50,16 +57,16 @@ public class ShellLibraryCommands {
     @ShellMethod(key = {"aa", "addauthor"}, value = "add author")
     public void addAuthor(String firstName, String lastName) {
 
-        authorService.addNewAuthor(firstName, lastName);
-        authorService.showAllAuthors();
+        authorService.add(firstName, lastName);
+        authorService.showAll();
     }
 
     @SneakyThrows
     @ShellMethod(key = {"ag", "addgenre"}, value = "add genre")
     public void addGenre(String genreName) {
 
-        genreService.addNewGenre(genreName);
-        genreService.showAllGenres();
+        genreService.add(genreName);
+        genreService.showAll();
     }
 
     @SneakyThrows
@@ -68,49 +75,49 @@ public class ShellLibraryCommands {
                         long authorId,
                         long genreId) {
 
-        boolean result = bookService.addNewBook(bookTitle, authorId, genreId);
+        boolean result = bookService.add(bookTitle, authorId, genreId);
         if (result)
-            bookService.showAllBooks();
+            bookService.showAll();
     }
 
     @SneakyThrows
     @ShellMethod(key = {"ac", "addcomment"}, value = "add comment")
     public void addComment(String commentName, long bookId) {
 
-        commentService.addNewComment(commentName, bookId);
-        commentService.showAllComments();
+        commentService.add(commentName, bookId);
+        commentService.showAll();
     }
 
     @SneakyThrows
     @ShellMethod(key = {"db", "delbook"}, value = "delete book")
     public void delBook(long id) {
 
-        bookService.delBook(id);
-        bookService.showAllBooks();
+        bookService.del(id);
+        bookService.showAll();
     }
 
     @SneakyThrows
     @ShellMethod(key = {"dc", "delcomment"}, value = "delete comment")
     public void delComment(long id) {
 
-        commentService.deleteComment(id);
-        commentService.showAllComments();
+        commentService.del(id);
+        commentService.showAll();
     }
 
     @SneakyThrows
     @ShellMethod(key = {"ub", "updbook"}, value = "update book")
     public void updBook(long Id, String bookTitle, long authorId, long genreId) {
 
-        bookService.updBook(Id, bookTitle, authorId, genreId);
-        bookService.showAllBooks();
+        bookService.upd(Id, bookTitle, authorId, genreId);
+        bookService.showAll();
     }
 
     @SneakyThrows
     @ShellMethod(key = {"uc", "updcomment"}, value = "update comment")
     public void updComment(long id, String text, long bookId) {
 
-        commentService.updateComment(id, text, bookId);
-        commentService.showAllComments();
+        commentService.upd(id, text, bookId);
+        commentService.showAll();
     }
 
 }

@@ -2,6 +2,7 @@ package ru.otus.spring.kreidun.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.otus.spring.kreidun.models.Book;
 import ru.otus.spring.kreidun.models.Comment;
 import ru.otus.spring.kreidun.repositories.BookRepository;
@@ -18,7 +19,8 @@ public class CommentServiceImpl implements CommentService {
     private final IOService ioService;
 
     @Override
-    public boolean addNewComment(String text, Long bookId) {
+    @Transactional
+    public boolean add(String text, Long bookId) {
 
         Book book = bookRepository.getById(bookId);
         if (book == null) {
@@ -32,7 +34,8 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public boolean deleteComment(Long commentId) {
+    @Transactional
+    public boolean del(Long commentId) {
 
         Comment comment = commentRepository.findById(commentId);
         if (comment == null) {
@@ -45,7 +48,8 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public boolean updateComment(Long commentId, String text, Long bookId) {
+    @Transactional
+    public boolean upd(Long commentId, String text, Long bookId) {
 
         Book book = bookRepository.getById(bookId);
         if (book == null) {
@@ -53,19 +57,30 @@ public class CommentServiceImpl implements CommentService {
             return false;
         }
 
-        commentRepository.update(commentId, text, bookId);
+        Comment comment = commentRepository.findById(commentId);
+        if (comment == null) {
+            ioService.printString("Комментарий не найден!");
+            return false;
+        }
+
+        comment.setText(text);
+        comment.setBook(book);
+        commentRepository.save(comment);
         return true;
     }
 
 
     @Override
-    public void showAllComments() {
+    @Transactional(readOnly = true)
+    public void showAll() {
 
         String showComment;
         List<Comment> listComment = commentRepository.getAll();
         for (Comment comment : listComment) {
             showComment = " Comment: Id = " + comment.getId()+ " Comment = " + comment.getText() +
-                        " Book: " + comment.getBook().getTitle();
+                        " Book: " + comment.getBook().getTitle() +
+                        " Author: " + comment.getBook().getAuthor().getFirstName() +
+                        " " + comment.getBook().getAuthor().getLastName();
             ioService.printString(showComment);
         }
     }

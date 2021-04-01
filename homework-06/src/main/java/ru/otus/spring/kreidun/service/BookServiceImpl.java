@@ -2,6 +2,7 @@ package ru.otus.spring.kreidun.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.otus.spring.kreidun.repositories.AuthorRepository;
 import ru.otus.spring.kreidun.repositories.BookRepository;
 import ru.otus.spring.kreidun.repositories.GenreRepository;
@@ -21,7 +22,8 @@ public class BookServiceImpl implements BookService {
     private final IOService ioService;
 
     @Override
-    public boolean addNewBook(String bookName, Long authorId, Long genreId) {
+    @Transactional
+    public boolean add(String bookName, Long authorId, Long genreId) {
 
         Author author = authorRepository.findById(authorId);
         if (author == null) {
@@ -41,7 +43,8 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public boolean delBook(long id) {
+    @Transactional
+    public boolean del(long id) {
 
         Book book = bookRepository.getById(id);
         if (book == null) {
@@ -54,7 +57,8 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public boolean updBook(long id, String bookTitle, long authorId, long genreId){
+    @Transactional
+    public boolean upd(long id, String bookTitle, long authorId, long genreId){
 
         Book book = bookRepository.getById(id);
         if (book == null) {
@@ -74,15 +78,32 @@ public class BookServiceImpl implements BookService {
             return false;
         }
 
-        bookRepository.update(id, bookTitle, authorId, genreId);
+        book.setTitle(bookTitle);
+        book.setAuthor(author);
+        book.setGenre(genre);
+        bookRepository.save(book);
         return true;
     }
 
     @Override
-    public void showAllBooks() {
+    public void showAll() {
 
         String showBook;
         List<Book> listBook = bookRepository.getAll();
+        for (Book book : listBook) {
+            showBook = "Id: = " + book.getId() + " BookTitle: " + book.getTitle() +
+                    " Author: " + book.getAuthor().getFirstName() + " " + book.getAuthor().getLastName() +
+                    " Genre: " + book.getGenre().getName();
+            ioService.printString(showBook);
+        }
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public void showByAuthorId(long author_id) {
+
+        String showBook;
+        List<Book> listBook = authorRepository.findById(author_id).getBooks();
         for (Book book : listBook) {
             showBook = "Id: = " + book.getId() + " BookTitle: " + book.getTitle() +
                     " Author: " + book.getAuthor().getFirstName() + " " + book.getAuthor().getLastName() +

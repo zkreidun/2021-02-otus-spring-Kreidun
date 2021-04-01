@@ -24,7 +24,6 @@ public class Author {
     @Column(name = "lastname", nullable = false, unique = false)
     private String lastName;
 
-    @OneToMany(targetEntity = Book.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "book_id")
+    @OneToMany(targetEntity = Book.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "author")
     private List<Book> books;
 }

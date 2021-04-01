@@ -10,5 +10,4 @@ public interface CommentRepository {
     Comment findById(long id);
     List<Comment> getAll();
     void deleteById(long id);
-    void update(long id, String text, long bookId);
 }

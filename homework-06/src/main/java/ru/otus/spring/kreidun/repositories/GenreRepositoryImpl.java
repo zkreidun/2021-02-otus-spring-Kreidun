@@ -1,7 +1,6 @@
 package ru.otus.spring.kreidun.repositories;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import ru.otus.spring.kreidun.models.Genre;
 
 import javax.persistence.EntityManager;
@@ -9,7 +8,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
-@Transactional
 @Repository
 public class GenreRepositoryImpl implements GenreRepository {
 

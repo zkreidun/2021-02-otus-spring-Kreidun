@@ -89,18 +89,4 @@ class CommentRepositoryImplTest {
 
         assertThat(deletedComment).isNull();
     }
-
-    @DisplayName("изменять комментарий по его id")
-    @Test
-    void shouldUpdateCommentById() {
-
-        Comment firstComment = em.find(Comment.class, FIRST_COMMENT_ID);
-        assertThat(firstComment).isNotNull();
-        em.detach(firstComment);
-
-        repositoryComment.update(FIRST_COMMENT_ID, NEW_COMMENT_TEXT, SECOND_BOOK_ID);
-        firstComment = em.find(Comment.class, FIRST_COMMENT_ID);
-        assertThat(firstComment.getText()).isEqualTo(NEW_COMMENT_TEXT);
-        assertThat(firstComment.getBook().getId()).isEqualTo(SECOND_BOOK_ID);
-    }
 }

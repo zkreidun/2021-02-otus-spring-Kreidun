@@ -2,8 +2,9 @@ package ru.otus.spring.kreidun.service;
 
 public interface BookService {
 
-    boolean addNewBook(String bookTitle, Long authorId, Long genreId);
-    boolean delBook(long id);
-    boolean updBook(long id, String bookTitle, long authorId, long genreId);
-    void showAllBooks();
+    boolean add(String bookTitle, Long authorId, Long genreId);
+    boolean del(long id);
+    boolean upd(long id, String bookTitle, long authorId, long genreId);
+    void showAll();
+    void showByAuthorId(long author_id);
 }

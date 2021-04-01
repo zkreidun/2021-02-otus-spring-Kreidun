@@ -1,7 +1,6 @@
 package ru.otus.spring.kreidun.repositories;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import ru.otus.spring.kreidun.models.Comment;
 
 import javax.persistence.EntityManager;
@@ -10,7 +9,6 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
-@Transactional
 @Repository
 public class CommentRepositoryImpl implements CommentRepository {
 
@@ -44,7 +42,8 @@ public class CommentRepositoryImpl implements CommentRepository {
     public List<Comment> getAll() {
 
         TypedQuery<Comment> query =  em.createQuery("select c from Comment c " +
-                "join fetch c.book ",
+                "join fetch c.book b " +
+                "join fetch b.author a ",
                 Comment.class);
         return query.getResultList();
     }
@@ -52,24 +51,7 @@ public class CommentRepositoryImpl implements CommentRepository {
     @Override
     public void deleteById(long id) {
 
-        Query query = em.createQuery("delete " +
-                "from Comment c " +
-                "where c.id = :id");
-        query.setParameter("id", id);
-        query.executeUpdate();
-    }
-
-    @Override
-    public void update(long id, String text, long bookId) {
-
-        Query query = em.createQuery("update " +
-                "Comment c " +
-                "set c.text = :text " +
-                ", c.book = (select b from Book b where b.id = :bookId) " +
-                "where c.id = :id");
-        query.setParameter("id", id);
-        query.setParameter("text", text);
-        query.setParameter("bookId", bookId);
-        query.executeUpdate();
+        Comment comment = em.find(Comment.class, id);
+        em.remove(comment);
     }
 }

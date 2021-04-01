@@ -93,25 +93,6 @@ class BookRepositoryImplTest {
         assertThat(actualBook.getAuthor().getLastName()).isEqualTo(author.getLastName());
     }
 
-    @DisplayName("изменить книгу")
-    @Test
-    void shouldUpdateBook() {
-
-        Author author = em.find(Author.class, NEW_BOOK_AUTHORID);
-        Genre genre = em.find(Genre.class, NEW_BOOK_GENREID);
-
-        Book book = em.find(Book.class, DEFAULT_BOOK_ID);
-        assertThat(book).isNotNull();
-        em.detach(book);
-
-        bookRepository.update(DEFAULT_BOOK_ID, NEW_BOOK_TITLE, NEW_BOOK_AUTHORID, NEW_BOOK_GENREID);
-        book = em.find(Book.class, DEFAULT_BOOK_ID);
-        assertThat(book.getTitle()).isEqualTo(NEW_BOOK_TITLE);
-        assertThat(book.getGenre().getName()).isEqualTo(genre.getName());
-        assertThat(book.getAuthor().getFirstName()).isEqualTo(author.getFirstName());
-        assertThat(book.getAuthor().getLastName()).isEqualTo(author.getLastName());
-    }
-
     @DisplayName("удалять книгу по id")
     @Test
     void shouldCorrectDeleteBookById() {
@@ -125,6 +106,4 @@ class BookRepositoryImplTest {
 
         assertThat(deletedBook).isNull();
     }
-
-
 }
