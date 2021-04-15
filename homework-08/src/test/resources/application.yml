@@ -1,0 +1,10 @@
+spring:
+  shell:
+    interactive:
+      enabled: false
+
+  data:
+    mongodb:
+      uri: mongodb://localhost
+      port: 27017
+      database: test
