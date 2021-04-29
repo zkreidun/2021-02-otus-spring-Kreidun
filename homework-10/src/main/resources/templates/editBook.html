@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Добавление/редактирование книги</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        label {
+            display: inline-block;
+            width: 100px;
+        }
+
+        input:read-only {
+            background: lightgray;
+        }
+
+        .row {
+            margin-top: 10px;
+        }
+        select {
+            width: 300px;
+        }
+
+    </style>
+</head>
+<body>
+
+<form id="editbook-form" th:action="@{/saveBook}"   method="post"  action="listBooks.html" th:object="${book}">
+    <h1>Информация о книге:</h1>
+
+    <div class="row">
+        <label for="id-input">ID:</label>
+        <input id="id-input" name="id" type="text" readonly="readonly" th:value="*{id}" value="1"/>
+    </div>
+
+    <div class="row">
+        <label for="title-input">Наименование:</label>
+        <input id="title-input" size="100" name="title" type="text" th:value="*{title}" value="Некое наименование книги"/>
+    </div>
+
+    <div class="row">
+        <label for="author-select">Автор:</label>
+        <select name = "author" id="author-select" class="select" th:field="*{author}">
+
+            <option   th:each="aut : ${allauthors}"
+                      th:value="${aut.getId()}"
+                      th:text="(${aut.getFirstName()}+' '+${aut.getLastName()})">Автор</option>
+        </select>
+    </div>
+    <div class="row">
+        <label for="genre-select">Жанр:</label>
+        <select name = "genre" id="genre-select" class="select" th:field="*{genre}">
+
+            <option   th:each="gen : ${allgenres}"
+                      th:value="${gen.getId()}"
+                      th:text="${gen.getName()}">Жанр</option>
+        </select>
+    </div>
+    <div class="row">
+
+        <button type="submit">Сохранить</button>
+    </div>
+</form>
+
+</body>
+</html>
