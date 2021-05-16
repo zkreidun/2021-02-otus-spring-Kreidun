@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>List of all books</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        .books, .books td {
+            border: 1px solid lightgray;
+            padding: 5px;
+        }
+        a:link  {
+            color: #008000;
+            text-decoration:underline;
+
+        }
+        a:hover {
+            color: #800000;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<h1>Перечень книг:</h1>
+
+<table class="books">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Наименование</th>
+        <th>Автор</th>
+        <th>Жанр</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="book : ${books}" th:object="${book}">
+        <td th:text="*{id}">1</td>
+        <td th:text="*{title}">Book name</td>
+        <td th:text="(*{author.getFirstName()}+' '+*{author.getLastName()})">Author</td>
+        <td th:text="*{genre.getName()}">Genre</td>
+        <td>
+            <a th:href="@{/editbook(id=${book.id})}" href="editBook.html">Редактировать</a>
+        </td>
+        <td>
+            <form th:action="@{/deletebook}" method="post" action="listBooks.html">
+                <input type="hidden" name="id" th:value="${book.id}">
+                <a onclick="$(this).closest('form').submit()">Удалить</a>
+            </form>
+        </td>
+        <td>
+            <a th:href="@{/commentsbook/(id=${book.id})}" href="listComments.html">Посмотреть комментарии</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div class="row">
+    <form id="addbook" th:action="@{/addbook}" method="get" action="editBook.html">
+        <button href="editBook.html" type="submit">Добавить книгу</button>
+    </form>
+    <form id="listauthors" th:action="@{/authors}" action="listAuthors.html">
+        <button type="submit">Список авторов</button>
+    </form>
+    <form id="listgenres" th:action="@{/genres}" action="listGenres.html">
+        <button href="listGenres.html" type="submit">Список жанров</button>
+    </form>
+</div>
+</body>
+</html>
