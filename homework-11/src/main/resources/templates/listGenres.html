@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>List of all genres</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        .genres, .genres td {
+            border: 1px solid lightgray;
+            padding: 5px;
+        }
+        a:link  {
+            color: #008000;
+            text-decoration:underline;
+
+        }
+        a:hover {
+            color: #800000;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<h1>Список жанров в библиотеке:</h1>
+
+<table id="tableGenres"  class="genres">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Наименование</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+</body>
+
+<script>
+    $(function () {
+        $.get('/api/genres').done(function (genres) {
+            genres.forEach(function (genre) {
+                $('#tableGenres>tbody').append(`
+                    <tr id="genre_${genre.id}">
+                        <td>${genre.id}</td>
+                        <td>${genre.name}</td>
+                        <td>
+                        <a onclick="deleteGenre('${genre.id}')">Удалить</a>
+                        </td>
+                    </tr>
+                `)
+            });
+        })
+    });
+
+    function deleteGenre(id) {
+        $.ajax({
+            url: '/api/genres/'+ id,
+            type: 'DELETE',
+            success:function(){
+                $('#genre_'+id).remove();
+            },
+            error:function(){alert('Что-то пошло не так!');}
+        });
+    }
+
+</script>
+
+</html>

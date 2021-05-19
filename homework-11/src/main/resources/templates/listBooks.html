@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>List of all books</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+        .books, .books td {
+            border: 1px solid lightgray;
+            padding: 5px;
+        }
+        a:link  {
+            color: #008000;
+            text-decoration:underline;
+
+        }
+        a:hover {
+            color: #800000;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<h1>Перечень книг:</h1>
+<table id="tableBooks" class="books">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Наименование</th>
+        <th>Автор</th>
+        <th>Жанр</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+</body>
+
+<script>
+    $(function () {
+        $.get('/api/books').done(function (books) {
+            books.forEach(function (book) {
+                $('#tableBooks>tbody').append(`
+                    <tr id="book_${book.id}">
+                        <td>${book.id}</td>
+                        <td>${book.title}</td>
+                        <td>${book.author.firstname + " " + book.author.lastname}</td>
+                        <td>${book.genre.name}</td>
+                        <td>
+                        <a onclick="deleteBook('${book.id}')">Удалить</a>
+                        </td>
+                    </tr>
+                `)
+            });
+        })
+    });
+
+    function deleteBook(id) {
+        $.ajax({
+            url: '/api/books/'+ id,
+            type: 'DELETE',
+            success:function(){
+                $('#book_'+id).remove();
+            },
+            error:function(){alert('Что-то пошло не так!');}
+        });
+    }
+
+</script>
+</html>
