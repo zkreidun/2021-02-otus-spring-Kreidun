@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>List of comments by book</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+        .comments, .comments td {
+            border: 1px solid lightgray;
+            padding: 5px;
+        }
+        a:link  {
+            color: #008000;
+            text-decoration:underline;
+
+        }
+        a:hover {
+            color: #800000;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+<h1 >Комментарии по книге</h1>
+
+<table class="comments">
+    <thead>
+    <tr>
+        <th>Текст комментария</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="comment : ${comments}">
+        <td th:text="${comment.getText()}">Comment</td>
+        <td>
+            <a th:href="@{/editcomment(id=${comment.getId()})}" href="editComment.html">Редактировать</a>
+        </td>
+        <td>
+
+            <form  th:action="@{/deletecomment}"  method="post" action="listComment.html">
+                <input type="hidden" name="id" th:value="${comment.getId()}">
+                <a onclick="$(this).closest('form').submit()">Удалить</a>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<form id="addcomment" th:action="@{/addcomment}"  method="post" action="editComment.html">
+    <input type="hidden" name="bookid" th:value="${bookid}">
+    <button type="submit">Добавить комментарий</button>
+</form>
+<form id="listbooks" th:action="@{/}" action="listBooks.html">
+    <button type="submit">Вернуться к списку книг</button>
+</form>
+
+</body>
+</html>
