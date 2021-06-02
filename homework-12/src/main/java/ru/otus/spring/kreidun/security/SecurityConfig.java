@@ -45,16 +45,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .and()
-                .rememberMe().userDetailsService(userDetailsService)
+                .rememberMe().key("Key").tokenValiditySeconds(50000)
                 .and()
                 .logout()
                 .logoutUrl("/logout")
                 .deleteCookies("JSESSIONID");
-        ;
-        http.rememberMe()
-                .key("Key")
-                .tokenValiditySeconds(50000)
-        ;
     }
 
     @Bean
