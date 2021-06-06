@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>List of comments by book</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+        .comments, .comments td {
+            border: 1px solid lightgray;
+            padding: 5px;
+        }
+        a:link  {
+            color: #008000;
+            text-decoration:underline;
+
+        }
+        a:hover {
+            color: #800000;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+<h1 >Комментарии к книге</h1>
+
+<table class="comments">
+    <thead>
+    <tr>
+        <th>Текст комментария</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="comment : ${comments}">
+        <td th:text="${comment.getText()}">Comment</td>
+    </tr>
+    </tbody>
+</table>
+<form id="listbooks" th:action="@{/}" action="listBooks.html">
+    <button type="submit">Вернуться к списку книг</button>
+</form>
+
+</body>
+</html>
