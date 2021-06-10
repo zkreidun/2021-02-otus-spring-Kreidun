@@ -1,0 +1,18 @@
+spring:
+  batch:
+    job:
+      enabled: false
+  shell:
+    interactive:
+      enabled: false
+
+  data:
+    mongodb:
+      uri: mongodb://localhost
+      port: 0
+      database: SpringBatchDB
+
+
+logging:
+  level:
+    root: ERROR

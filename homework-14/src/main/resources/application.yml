@@ -1,0 +1,21 @@
+spring:
+  batch:
+    job:
+      enabled: false
+  shell:
+    interactive:
+      enabled: true
+  show-sql: true
+  h2:
+    console:
+      enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+
+  data:
+    mongodb:
+      uri: mongodb://localhost
+      port: 0
+      database: SpringBatchDB
