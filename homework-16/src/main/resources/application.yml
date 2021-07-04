@@ -1,0 +1,21 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+  health:
+    defaults:
+      enabled: true
+
+spring:
+  show-sql: true
+  data:
+    rest:
+      basePath: /datarest
+
+logging:
+  file:
+    name: app.log
