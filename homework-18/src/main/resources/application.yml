@@ -1,0 +1,27 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - metrics
+          - health
+          - logfile
+          - hystrix.stream
+
+spring:
+  application:
+    name: "library"
+  show-sql: true
+  data:
+    rest:
+      basePath: /datarest
+server:
+  port: 8080
+logging:
+  file:
+    name: app.log
+
+execution:
+  isolation:
+    thread:
+      timeoutInMilliseconds: 1000
